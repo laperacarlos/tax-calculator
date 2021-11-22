@@ -1,10 +1,10 @@
 package com.taxulator.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Getter
@@ -12,5 +12,6 @@ public class TaxEntryDto {
     private final String name;
     private final BigDecimal income;
     private final BigDecimal revenue;
-    private final LocalDateTime creationDate;
+    @JsonIgnore
+    private final long orderId;
 }
