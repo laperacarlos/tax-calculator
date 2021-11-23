@@ -16,12 +16,21 @@ public class TaxEntryMapper {
                 .collect(Collectors.toList());
     }
 
-    private TaxEntryDto mapToTaxEntryDto(final TaxEntry taxEntry) {
+    public TaxEntryDto mapToTaxEntryDto(final TaxEntry taxEntry) {
         return new TaxEntryDto(
                 taxEntry.getName(),
                 taxEntry.getIncome(),
                 taxEntry.getRevenue(),
-                taxEntry.getOrderId()
+                taxEntry.getId()
+        );
+    }
+
+    public TaxEntry mapToTaxEntry(final TaxEntryDto taxEntryDto) {
+        return new TaxEntry(
+                taxEntryDto.getName(),
+                taxEntryDto.getIncome(),
+                taxEntryDto.getRevenue(),
+                taxEntryDto.getId()
         );
     }
 }

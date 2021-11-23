@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TaxEntryMapperTest {
 
@@ -26,8 +27,8 @@ public class TaxEntryMapperTest {
         List<TaxEntry> entryList = new ArrayList<>();
         BigDecimal income = new BigDecimal("2000.00");
         BigDecimal revenue = new BigDecimal("502.05");
-        TaxEntry entry1 = new TaxEntry("comp1", income, revenue, 1L);
-        TaxEntry entry2 = new TaxEntry("comp2", income, revenue, 2L);
+        TaxEntry entry1 = new TaxEntry("comp1", income, revenue, "id1");
+        TaxEntry entry2 = new TaxEntry("comp2", income, revenue, "id2");
         entryList.add(entry1);
         entryList.add(entry2);
 
@@ -36,11 +37,26 @@ public class TaxEntryMapperTest {
 
         //then
         assertEquals(2, taxEntryDtoList.size());
-        assertEquals(1L, taxEntryDtoList.get(0).getOrderId());
+        assertEquals("id1", taxEntryDtoList.get(0).getId());
         assertEquals("comp1", taxEntryDtoList.get(0).getName());
         assertEquals(new BigDecimal("2000.00"), taxEntryDtoList.get(0).getIncome());
         assertEquals(new BigDecimal("502.05"), taxEntryDtoList.get(0).getRevenue());
-        assertEquals(2L, taxEntryDtoList.get(1).getOrderId());
+        assertEquals("id2", taxEntryDtoList.get(1).getId());
         assertEquals("comp2", taxEntryDtoList.get(1).getName());
+    }
+
+    @Test
+    void shouldMapToTaxEntry() {
+        //given
+        TaxEntryDto taxEntryDto = new TaxEntryDto("żółtaFirma", new BigDecimal("2000.00"), null, null);
+
+        //when
+        TaxEntry taxEntry = mapper.mapToTaxEntry(taxEntryDto);
+
+        //then
+        assertEquals("żółtaFirma", taxEntry.getName());
+        assertEquals(new BigDecimal("2000.00"), taxEntry.getIncome());
+        assertNull(taxEntry.getRevenue());
+        assertNull(taxEntry.getId());
     }
 }

@@ -2,12 +2,12 @@
 
 * Build and install the project using command:
    ```
-    mvn clean install
+    mvn install
    ```
 
-* Run application locally using IDE **OR** go to the directory with jar file and run command:
+* Run application locally using IDE **OR** go to the project directory and run command:
    ```
-    java -jar tax-calculator-0.0.1-SNAPSHOT.jar
+    java -jar target/tax-calculator-0.0.1-SNAPSHOT.jar
    ```
 
 ## How it works
@@ -17,16 +17,16 @@
    ```
    curl -X POST -H "Content-Type: application/json" -d "{\"name\" : \"company1\", \"income\" : 3000}" http://localhost:8080/entries
    ```
-  Application will process all necessary calculations and store created TaxEntry object on `List<TaxEntry> taxEntryList`
-  . You can send the POST request with different data as many times as you need.
+  Application will process all necessary calculations and store created TaxEntry object on `List<TaxEntry> taxEntryList`. 
+  You can send the POST request with different data as many times as you need.
 
 * Type url: http://localhost:8080/entries in your browser **OR** use `curl`:
   ```
    curl http://localhost:8080/entries
   ```
-  Result is a JSON with the array of five last added objects representing TaxEntryDto class objects and logging info
-  message with detailed data in the console. The array is sorted starting from the newest entry. If there are less than
-  five entries in memory, message info concerning the actual size of the list will be logged in the console.
+  Result is a JSON with the array of five last added objects representing TaxEntryDto class objects and logging in the
+  console info message concerning the actual size of the list and detailed data for each entry. The array starts with
+  the oldest entry.
 
 * Shut down application in your IDE **OR** use `curl`:
   ```

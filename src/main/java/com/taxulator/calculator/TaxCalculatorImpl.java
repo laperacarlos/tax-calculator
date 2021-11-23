@@ -24,7 +24,7 @@ public class TaxCalculatorImpl implements TaxCalculator {
             return income.subtract(ZUS);
         } else {
             BigDecimal payExtra = income.subtract(ZUS).abs();
-            LOGGER.info("Congratulations, you are not earning enough to pay ZUS! Ho have to pay extra amount of: " + payExtra + " PLN. Long live ZUS!");
+            LOGGER.info("Congratulations, you are not earning enough to pay ZUS! You have to pay extra amount of: " + payExtra + " PLN. Long live ZUS!");
             return BigDecimal.ZERO;
         }
     }

@@ -32,6 +32,6 @@ public class TaxCalculatorController {
 
     @PostMapping(value = "entries", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createTaxEntry(@RequestBody TaxEntryDto taxEntryDto) {
-        taxService.createTaxEntry(taxEntryDto.getName(), taxEntryDto.getIncome());
+        taxService.createTaxEntry(mapper.mapToTaxEntry(taxEntryDto));
     }
 }
